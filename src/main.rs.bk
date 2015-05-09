@@ -2,7 +2,7 @@
 #![plugin(serde_macros)]
 extern crate serde;
 
-extern crate uuid;
+extern crate uuid; 
 
 // the order of featur matters
 
@@ -11,7 +11,7 @@ use uuid::Uuid;
 use std::collections::HashMap;
 
 fn new_id() -> String {
-    Uuid::new_v4().to_string()
+     Uuid::new_v4().to_string()
 }
 
 /*
@@ -33,8 +33,7 @@ impl Item  {
 
     fn new() -> Item {
         let id = new_id();
-        Item { id : id, completed: false, order: 0, 
-            title: None, text: None }
+        Item { id : id, completed: false, order: 0, title: None, text: None }
     }
 
     fn url(&self) -> String {
@@ -46,26 +45,26 @@ impl Item  {
 
     fn update(&mut self, item: Item) -> &mut Item {
     // pattern math?
-        self.title = item.title;
-        self.completed = item.completed;
-        self.order = item.order;
-        self.text = item.text;
-        self
-    }
+     self.title = item.title;
+     self.completed = item.completed;
+     self.order = item.order;
+     self.text = item.text;
+     self
+}
 
 }
 
 type TODO<'a> = HashMap<String,&'a Item>;
 
 fn main() {
-    let it = Item::new();
-    println!("{:?}",json::to_string(&it).unwrap());
-    let mut todo = TODO::new();
-    todo.insert(it.id.to_owned(), &it);
-    println!("{:?}",json::to_string(&todo).unwrap());
-    println!("{:?}", todo);
-    let url = it.url();
-    println!("{}", url);
+     let it = Item::new();
+     println!("{:?}",json::to_string(&it).unwrap());
+     let mut todo = TODO::new();
+     todo.insert(it.id.to_owned(), &it);
+     println!("{:?}",json::to_string(&todo).unwrap());
+     println!("{:?}", todo);
+     let url = it.url();
+     println!("{}", url);
 }
 
 
