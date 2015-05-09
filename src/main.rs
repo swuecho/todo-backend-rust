@@ -1,5 +1,7 @@
 extern crate uuid;
 use uuid::Uuid;
+use std::collections::HashMap;
+
 fn new_id() -> String {
      Uuid::new_v4().to_string()
 }
@@ -42,9 +44,14 @@ fn update(&mut self, item: Item) -> &mut Item {
 
 }
 
+type TODO<'a> = HashMap<String,&'a Item>;
+
 fn main() {
      let it = Item::new();
      println!("{:?}", it);
+     let mut todo = TODO::new();
+     todo.insert(it.id.to_owned(), &it);
+     println!("{:?}", todo);
      let url = it.url();
      println!("{}", url);
 }
