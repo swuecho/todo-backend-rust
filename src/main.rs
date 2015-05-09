@@ -1,11 +1,20 @@
-extern crate uuid;
+
+#![feature(custom_derive, plugin)]
+#![plugin(serde_macros)]
+extern crate serde;
+
+extern crate uuid; 
+
+// the order of featur matters
+
+use serde::json;
 use uuid::Uuid;
 use std::collections::HashMap;
 
 fn new_id() -> String {
      Uuid::new_v4().to_string()
 }
-#[derive(Debug)]
+#[derive(Debug,Serialize, Deserialize)]
 struct Item {
      id   :     String,
      title:     Option<String>,
@@ -48,9 +57,10 @@ type TODO<'a> = HashMap<String,&'a Item>;
 
 fn main() {
      let it = Item::new();
-     println!("{:?}", it);
+     println!("{:?}",json::to_string(&it).unwrap());
      let mut todo = TODO::new();
      todo.insert(it.id.to_owned(), &it);
+     println!("{:?}",json::to_string(&todo).unwrap());
      println!("{:?}", todo);
      let url = it.url();
      println!("{}", url);

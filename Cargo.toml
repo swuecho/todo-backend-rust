@@ -6,3 +6,5 @@ authors = ["Hao Wu <hwu@intellisurvey.com>"]
 
 [dependencies]
 uuid = "0.1"
+serde="*"
+serde_macros="*"
