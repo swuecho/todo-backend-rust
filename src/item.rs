@@ -31,11 +31,11 @@ fn fqdn (s: String) -> String {
 
 impl Item  {
 
-fn new() -> Item {
+pub fn new() -> Item {
      let id = new_id();
      Item { id : id, completed: false, order: 0, title: None, text: None }
 }
-fn url(&self) -> String {
+pub fn url(&self) -> String {
     let host = "http://todo-backend-rust.herokuapp.com";
     let path = "todo";
     let id = self.id.to_owned();
